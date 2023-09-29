@@ -18,15 +18,18 @@ st.markdown("#### check all the available models")
 st.write(models())
 
 st.markdown("#### `train` decision tree")
-dt = create_model('dt')
+with st.spinner('Preparing...'):
+    dt = create_model('dt')
 st.write(dt)
 
 st.markdown("#### compare all models")
-best_model = compare_models()
+with st.spinner('Preparing...'):
+    best_model = compare_models()
 st.write(best_model)
 
 st.markdown("#### `predict` on hold-out")
-pred_holdout = predict_model(best_model)
+with st.spinner('Preparing...'):
+    pred_holdout = predict_model(best_model)
 st.write(pred_holdout)
 
 st.markdown('### create copy of data drop target column')
@@ -35,15 +38,18 @@ data2.drop('charges', axis=1, inplace=True)
 st.write(data2)
 
 st.markdown('### generate predictions')
-predictions = predict_model(best_model, data=data2)
+with st.spinner('Preparing...'):
+    predictions = predict_model(best_model, data=data2)
 st.write(predictions)
 
 st.markdown('### import untrained estimator')
 sc = SymbolicRegressor()
 st.markdown('### `train` using create_model')
-sc_trained = create_model(sc)
+with st.spinner('Preparing...'):
+    sc_trained = create_model(sc)
 st.write(sc_trained)
 
 st.markdown('### check hold-out score')
-pred_holdout_sc = predict_model(sc_trained)
+with st.spinner('Preparing...'):
+    pred_holdout_sc = predict_model(sc_trained)
 st.write(pred_holdout_sc)
