@@ -1,21 +1,23 @@
 import streamlit as st
+from gplearn.genetic import SymbolicRegressor
 from pycaret.datasets import get_data
 from pycaret.regression import *
 
-st.markdown("# Pycaret AutoML in Streamlit!")
+st.markdown("# `Pycaret AutoML` in Streamlit!")
 
-st.markdown("#### read data from pycaret repo")
+st.markdown("#### read data from `pycaret` repo")
 data = get_data('insurance')
 st.write(data)
 
 st.markdown("#### initialize setup")
 s = setup(data, target='charges')
-st.write(s)
+with st.expander("expand to see data"):
+    st.write(s)
 
 st.markdown("#### check all the available models")
 st.write(models())
 
-st.markdown("#### train decision tree")
+st.markdown("#### `train` decision tree")
 dt = create_model('dt')
 st.write(dt)
 
@@ -23,6 +25,25 @@ st.markdown("#### compare all models")
 best_model = compare_models()
 st.write(best_model)
 
-st.markdown("#### predict on hold-out")
+st.markdown("#### `predict` on hold-out")
 pred_holdout = predict_model(best_model)
 st.write(pred_holdout)
+
+st.markdown('### create copy of data drop target column')
+data2 = data.copy()
+data2.drop('charges', axis=1, inplace=True)
+st.write(data2)
+
+st.markdown('### generate predictions')
+predictions = predict_model(best_model, data=data2)
+st.write(predictions)
+
+st.markdown('### import untrained estimator')
+sc = SymbolicRegressor()
+st.markdown('### `train` using create_model')
+sc_trained = create_model(sc)
+st.write(sc_trained)
+
+st.markdown('### check hold-out score')
+pred_holdout_sc = predict_model(sc_trained)
+st.write(pred_holdout_sc)
