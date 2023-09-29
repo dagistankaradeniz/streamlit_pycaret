@@ -25,8 +25,7 @@ with st.spinner('Preparing...'):
 st.write(dt)
 
 st.markdown("#### compare all models")
-with st.spinner('Preparing...'):
-    best_model = compare_models()
+best_model = compare_models()
 st.write(best_model)
 
 st.markdown("#### `predict` on hold-out")
