@@ -10,12 +10,14 @@ data = get_data('insurance')
 st.write(data)
 
 st.markdown("#### initialize setup")
-s = setup(data, target='charges')
+with st.spinner('Preparing...'):
+    s = setup(data, target='charges')
 with st.expander("expand to see data"):
     st.write(s)
 
 st.markdown("#### check all the available models")
-st.write(models())
+with st.spinner('Preparing...'):
+    st.write(models())
 
 st.markdown("#### `train` decision tree")
 with st.spinner('Preparing...'):
