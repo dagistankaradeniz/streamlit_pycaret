@@ -3,6 +3,11 @@ from gplearn.genetic import SymbolicRegressor
 from pycaret.datasets import get_data
 from pycaret.regression import *
 
+st.set_page_config(
+    page_title="dk - insurance dataset Pycaret AutoMl",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 st.markdown("# `Pycaret AutoML` in Streamlit!")
 
 st.markdown("#### read data from `pycaret` repo")
